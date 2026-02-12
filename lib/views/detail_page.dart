@@ -1,3 +1,4 @@
+// /views/explore_page.dart
 import 'package:flutter/material.dart';
 import 'package:pokeland/widgets/app_drawer.dart';
 
