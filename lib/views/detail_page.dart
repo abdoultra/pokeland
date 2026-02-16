@@ -1,23 +1,28 @@
-// /views/explore_page.dart
 import 'package:flutter/material.dart';
-import 'package:pokeland/widgets/app_drawer.dart';
+import '../models/pokemon_card.dart';
 
 class DetailPage extends StatelessWidget {
+  final PokemonCard card;
+
+  const DetailPage({super.key, required this.card});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Détails d\'un Pokémon')),
-      drawer: AppDrawer(),
-      body: Center(
+      appBar: AppBar(title: Text(card.name)),
+      body: Padding(
+        padding: EdgeInsets.all(16),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('Ceci est la page de détails d\'un Pokémon.'),
+            Image.network(card.imageUrl, height: 250),
             SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () => Navigator.pop(context),
-              child: Text('Retour'),
+            Text(
+              card.name,
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
             ),
+            SizedBox(height: 10),
+            Text('HP : ${card.hp ?? "Inconnu"}'),
+            Text('Rareté : ${card.rarity ?? "Inconnue"}'),
           ],
         ),
       ),

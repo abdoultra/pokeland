@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:pokeland/views/search_page.dart';
 import 'package:pokeland/views/explore_page.dart';
-import 'package:pokeland/views/detail_page.dart';
 
 class AppDrawer extends StatelessWidget {
   @override
@@ -12,50 +11,44 @@ class AppDrawer extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: <Widget>[
           DrawerHeader(
-            decoration: BoxDecoration(color: Colors.blue),
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.primary,
+            ),
             child: Text(
-              'Menu',
+              'Pokeland',
               style: TextStyle(color: Colors.white, fontSize: 24),
             ),
           ),
+
           ListTile(
             leading: Icon(Icons.home),
             title: Text('Accueil'),
             onTap: () {
-              Navigator.pop(context); // Ferme le drawer
+              Navigator.pop(context);
               Navigator.popUntil(context, (route) => route.isFirst);
             },
           ),
+
           ListTile(
             leading: Icon(Icons.search),
-            title: Text('rechercher'),
+            title: Text('Rechercher'),
             onTap: () {
-              Navigator.pop(context); // Ferme le drawer
+              Navigator.pop(context);
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => SearchPage()),
+                MaterialPageRoute(builder: (_) => SearchPage()),
               );
             },
           ),
+
           ListTile(
             leading: Icon(Icons.explore),
-            title: Text('explorer'),
+            title: Text('Explorer'),
             onTap: () {
-              Navigator.pop(context); // Ferme le drawer
+              Navigator.pop(context);
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => ExplorePage()),
-              );
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.info),
-            title: Text('détails'),
-            onTap: () {
-              Navigator.pop(context); // Ferme le drawer
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => DetailPage()),
+                MaterialPageRoute(builder: (_) => ExplorePage()),
               );
             },
           ),

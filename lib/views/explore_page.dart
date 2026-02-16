@@ -1,8 +1,8 @@
-// /views/explore_page.dart
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../widgets/app_drawer.dart';
 import '../viewmodels/explore_viewmodel.dart';
+import 'detail_page.dart';
 
 class ExplorePage extends StatelessWidget {
   @override
@@ -51,20 +51,28 @@ class ExplorePageContent extends StatelessWidget {
       itemBuilder: (context, index) {
         final card = vm.cards[index];
 
-        return Card(
-          child: Column(
-            children: [
-              Expanded(
-                child: Image.network(card.imageUrl),
+        return GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => DetailPage(card: card),
               ),
-              Padding(
-                padding: EdgeInsets.all(8),
-                child: Text(
-                  card.name,
-                  style: TextStyle(fontWeight: FontWeight.bold),
+            );
+          },
+          child: Card(
+            child: Column(
+              children: [
+                Expanded(child: Image.network(card.imageUrl)),
+                Padding(
+                  padding: EdgeInsets.all(8),
+                  child: Text(
+                    card.name,
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         );
       },

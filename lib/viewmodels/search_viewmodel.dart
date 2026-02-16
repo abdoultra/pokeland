@@ -21,7 +21,6 @@ class SearchViewModel extends ChangeNotifier {
   void setQuery(String value) {
     _query = value;
 
-    // Debounce = attendre que l'utilisateur arrête de taper
     if (_debounce?.isActive ?? false) {
       _debounce!.cancel();
     }

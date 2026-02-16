@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../widgets/app_drawer.dart';
 import '../viewmodels/search_viewmodel.dart';
+import 'detail_page.dart';
 
 class SearchPage extends StatelessWidget {
   @override
@@ -37,7 +38,7 @@ class SearchPageContent extends StatelessWidget {
         decoration: InputDecoration(
           hintText: 'Nom du Pokémon...',
           prefixIcon: Icon(Icons.search),
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+          border: OutlineInputBorder(),
         ),
         onChanged: vm.setQuery,
       ),
@@ -46,9 +47,7 @@ class SearchPageContent extends StatelessWidget {
 
   Widget _buildBody(SearchViewModel vm) {
     if (vm.query.isEmpty) {
-      return Center(
-        child: Text('Tape un nom de Pokémon ', style: TextStyle(fontSize: 16)),
-      );
+      return Center(child: Text('Tape un nom de Pokémon'));
     }
 
     if (vm.loading) {
@@ -75,18 +74,28 @@ class SearchPageContent extends StatelessWidget {
       itemBuilder: (context, index) {
         final card = vm.results[index];
 
-        return Card(
-          child: Column(
-            children: [
-              Expanded(child: Image.network(card.imageUrl)),
-              Padding(
-                padding: EdgeInsets.all(8),
-                child: Text(
-                  card.name,
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
+        return GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => DetailPage(card: card),
               ),
-            ],
+            );
+          },
+          child: Card(
+            child: Column(
+              children: [
+                Expanded(child: Image.network(card.imageUrl)),
+                Padding(
+                  padding: EdgeInsets.all(8),
+                  child: Text(
+                    card.name,
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ],
+            ),
           ),
         );
       },
